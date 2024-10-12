@@ -9,7 +9,7 @@ License: MIT
 
 ## About
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+This is a graph database representation of the Crime Criminal information. It uses Neo4j as the graph database and PostgreSQL as the relational database. The project is dockerized and can be run locally or in a cloud environment. The Getting Started section below will guide you through the process of setting up the project. If you are using this code for your own project, please consider citing my work. In case of any issues in deployment or for customizations, please contact me at `sanjaysingh13@gmail.com`.
 
 ## Getting Started
 
