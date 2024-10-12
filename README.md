@@ -18,7 +18,7 @@ This is a graph database representation of the Crime Criminal information. It us
 To get started with CCS Docker, first clone the repository:
 
 ```bash
-git clone https://github.com/your-username/ccs-docker.git
+git clone https://github.com/sanjaysingh13/ccs_docker_2024.git
 cd ccs-docker
 ```
 
