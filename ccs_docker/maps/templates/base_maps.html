@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% load static i18n %}
+
+{% block css %}
+  {{ block.super }}
+  <link href='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css'
+        rel='stylesheet' />
+{% endblock css %}
+{% block javascript %}
+  {{ block.super }}
+  <script src='https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js'></script>
+{% endblock javascript %}

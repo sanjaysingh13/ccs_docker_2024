@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Criminal Search Results
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <h1>Criminal Search Results</h1>
+  <!--Pagination-->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      {% if criminals.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ criminals.previous_page_number }}">Previous</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+        </li>
+      {% endif %}
+      {% if criminals.number|add:'-4' > 1 %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ criminals.number|add:'-5' }}">...</a>
+        </li>
+      {% endif %}
+      {% for i in criminals.paginator.page_range %}
+        {% if criminals.number == i %}
+          <li class="page-item active" aria-current="page">
+            <span class="page-link">
+              {{ i }}
+              <span class="sr-only">(current)</span>
+            </span>
+          </li>
+        {% elif i > criminals.number|add:'-5' and i < criminals.number|add:'5' %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+      {% if criminals.paginator.num_pages > criminals.number|add:'4' %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ criminals.number|add:'5' }}">...</a>
+        </li>
+      {% endif %}
+      {% if criminals.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ criminals.next_page_number }}">Next</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+  <!--end of Pagination-->
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="list-group">
+        {% for criminal in criminals %}
+          {% if request.user.category in admin_users %}
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-sm-11">
+                  <a href="{% url 'graphs:criminal-detail' uuid=criminal.2 %}">
+                    {% if criminal.1 %}
+                      <img src="{{ criminal.1 }}"
+                           alt="Criminal's photo"
+                           height="50"
+                           class="d-inline" />
+                    {% else %}
+                      <img src="{% static 'images/user.svg' %}"
+                           alt="Default criminal photo"
+                           height="50"
+                           class="d-inline" />
+                    {% endif %}
+                    <p class="list-group-item-heading d-inline">{{ criminal.0 }}</p>
+                  </a>
+                </div>
+                <div class="col-sm-1">
+                  <span class="d-none">{{ criminal.2 }}</span>
+                  <button class="btn btn-info clipboard_search_results"
+                          data-uuid="{{ criminal.2 }}">ID</button>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <a href="{% url 'graphs:criminal-detail' uuid=criminal.2 %}"
+               class="list-group-item">
+              {% if criminal.1 %}
+                <img src="{{ criminal.1 }}"
+                     alt="Criminal's photo"
+                     height="50"
+                     class="d-inline" />
+              {% else %}
+                <img src="{% static 'images/user.svg' %}"
+                     alt="Default criminal photo"
+                     height="50"
+                     class="d-inline" />
+              {% endif %}
+              <p class="list-group-item-heading d-inline">{{ criminal.0 }}</p>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+{% block content %}
+  {{ witnesses_json|json_script:"witnesses_json" }}
+  {{ court_dates_json|json_script:"court_dates_json" }}
+  {% csrf_token %}
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10 offset-sm-1">
+        <div class="page-header">
+          <h3>
+            <a href="{% url 'backend:crime-detail' uuid=crime_uuid %}">{{ crime }}</a>
+          </h3>
+        </div>
+        <p>
+          <strong>Disposal:</strong> {{ final_form_description }}
+        </p>
+        <p>{{ court_procedure_timeline }}</p>
+        <p>{{ pp_io }}</p>
+        <p>
+          <strong>List of Accused sent for trial</strong>
+        </p>
+        <table class="table table-condensed table-responsive table-striped">
+          <thead>
+            <tr>
+              <th>Accused</th>
+              <th>Arrest Date</th>
+              <th>Custodial Trial</th>
+              <th>Bail Date (if any)</th>
+              <th>P/A date (if any)</th>
+              <th>Date of Copy Serve</th>
+              <th>Evidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for criminal in criminals %}
+              <tr>
+                <td>{{ criminal.0 }}</td>
+                <td>{{ criminal.1 }}</td>
+                <td>{{ criminal.2 }}</td>
+                <td>{{ criminal.3 }}</td>
+                <td>{{ criminal.4 }}</td>
+                <td>{{ criminal.5 }}</td>
+                <td>{{ criminal.6 }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Witnesses</h4>
+          </div>
+          <div class="panel-body">
+            <div class="tbl_witnesses"></div>
+          </div>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Court Dates</h4>
+          </div>
+          <div class="panel-body">
+            <div class="tbl_court_dates"></div>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="add_court_date">Add a Court Date</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block extra_js %}
+  <script>
+    // Your JavaScript code here
+  </script>
+{% endblock extra_js %}

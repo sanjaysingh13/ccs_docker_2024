@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Search Criminal by face
+{% endblock title %}
+{% block content %}
+  <h6>Upload Criminal photo</h6>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% crispy imagesform %}
+    <input type="submit" value="Upload" />
+  </form>
+{% endblock content %}

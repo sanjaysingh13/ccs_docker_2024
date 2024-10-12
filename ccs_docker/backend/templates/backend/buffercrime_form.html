@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Add Crime
+{% endblock title %}
+{% block content %}
+  <h1>Add Crime</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% crispy form form.helper %}
+    <h2>Criminals</h2>
+    {% crispy buffer_criminals_with_involvement helper %}
+    <input type="submit" value="Save" />
+  </form>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("police_station_id").value;
+      document.getElementById("crime_police_station_id").value = x;
+    }
+  </script>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Criminal Search
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <!-- {{ availableTags|json_script:"availableTags" }}
+ -->
+  {% crispy form form.helper %}
+{% endblock content %}

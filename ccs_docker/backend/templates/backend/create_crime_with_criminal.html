@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Add Crime
+{% endblock title %}
+{% block content %}
+  <h1>Add Crime</h1>
+  <form class="form-horizontal" method="POST">
+    {{ crimeform.management_form }}
+    <div class="row spacer">{% crispy crimeform crimeform.helper %}</div>
+    {% crispy formset helper %}
+    <div class="row spacer">
+      <div class="col-4 offset-2">
+        <button type="submit" class="btn btn-block btn-primary">Create</button>
+      </div>
+    </div>
+  </form>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("police_station_id").value;
+      document.getElementById("crime_police_station_id").value = x;
+    }
+  </script>
+{% endblock content %}

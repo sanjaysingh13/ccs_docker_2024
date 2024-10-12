@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+{% block content %}
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <div class="page-header">
+        <h3>{{ object }}</h3>
+        <span class="d-none">{{ deletion_power }}</span>
+      </div>
+      {% if object.gist %}
+        {% with gist=object.gist|safe %}<p>{{ gist|linebreaksbr }}</p>{% endwith %}
+      {% endif %}
+      {% if object.final_form_description %}
+        <p>
+          <strong>Disposal:</strong>{{ object.final_form_description|safe }}
+        </p>
+      {% endif %}
+      <p>
+        <strong>Classifications:</strong>{{ object.classification_list }}
+      </p>
+      <a href="{% url 'backend:crime-edit' unique_id=object.uuid %}"
+         class="btn btn-info">Edit</a>
+      <a href="{% url 'backend:crime-final_form' unique_id=object.uuid %}"
+         class="btn btn-info">Final Form</a>
+      {% if object.final_form_type == 0 %}
+        <a href="{% url 'backend:crime-subjudice' unique_id=object.uuid %}"
+           class="btn btn-info">Subjudice</a>
+      {% endif %}
+      {% if object.monitoring %}
+        <a href="{% url 'backend:crime-trial-monitoring' unique_id=object.uuid %}"
+           class="btn btn-info">Trial Monitoring</a>
+      {% endif %}
+      <a href="{% url 'pdf:crime-detail-pdf' uuid=object.uuid %}"
+         class="btn btn-info">PDF</a>
+      {% if user.is_authenticated %}
+        {% if user.username == 'stf' %}
+          <a href="{% url 'backend:add_stf' uuid=object.uuid %}"
+             class="btn btn-info">STF</a>
+        {% endif %}
+      {% endif %}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">Criminal-List</h4>
+        </div>
+        <div class="panel-body">
+          <div class="list-group">
+            {% for criminal in criminal_list %}
+              <a href="{% url 'graphs:criminal-detail' uuid=criminal.0.uuid %}"
+                 class="list-group-item">
+                <h5 class="list-group-item-heading">{{ criminal.0 }}</h5>
+                <p class="list-group-item-text">{{ criminal.1 }}</p>
+              </a>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

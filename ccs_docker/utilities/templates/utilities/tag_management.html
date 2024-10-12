@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Tag Management
+{% endblock title %}
+{% load static %}
+
+{% block content %}
+  <div class="container">
+    <h2 class="text-center">Tag Management</h2>
+    <div class="row">
+      <div class="col-12">
+        <h3 class="text-center">Merge, delete or change as Modus Operandi</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <ul class="list-group">
+          {% for tag in all_tags %}
+            <li class="list-group-item">
+              <input class="form-check-input me-1 tag_id"
+                     type="checkbox"
+                     value="{{ tag.1 }}"
+                     aria-label="Select tag" />
+              {{ tag.0 }}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <select class="form-select form-select-lg mb-3"
+                aria-label="Select action to be taken"
+                id="merger_action_to_be_taken">
+          <option selected>Action to be taken</option>
+          <option value="1">Merge the tags</option>
+          <option value="2">Delete the tags</option>
+          <option value="3">Change the tags to Modus Operandi</option>
+        </select>
+        <button type="submit" class="btn btn-primary mb-3" id="tag_management">Confirm</button>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+# Wait for the database to be ready
+python /app/manage.py wait_for_db
+
+# # Run migrations for each app in a specific order
+# python manage.py migrate users
+# python manage.py migrate backend
+# python manage.py migrate charts
+# python manage.py migrate ajax
+# python manage.py migrate django_celery_beat
+
+# Run any other necessary migrations
+python manage.py migrate
+
+# Start the Django development server
+exec python manage.py runserver_plus 0.0.0.0:8000

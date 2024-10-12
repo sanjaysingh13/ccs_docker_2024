@@ -1,0 +1,123 @@
+{% extends "base_charts.html" %}
+
+{% block title %}
+  Crime Chart
+{% endblock title %}
+{% block content %}
+  {{ crimes_json|json_script:"crimes_json" }}
+  <span id="stacked" class="d-none">{{ stacked }}</span>
+  <span id="description" class="d-none">{{ description|linebreaks }}</span>
+  <span id="time_unit" class="d-none">{{ time_unit }}</span>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+{% endblock content %}
+{% block inline_javascript %}
+  <script type="module">
+    const crimes_json = JSON.parse(document.getElementById('crimes_json').textContent);
+    console.log(crimes_json[0].crimes);
+    var ctx = document.getElementById('myChart').getContext('2d');
+    console.log(document.getElementById('stacked').textContent === "true");
+    if (document.getElementById('stacked').textContent === "true") {
+      var datasets = [];
+      crimes_json.forEach(function(crime_json, i) {
+        datasets.push({
+          label: crime_json["ps"],
+          data: crime_json["crimes"],
+          backgroundColor: 'hsla(' + (i * 60) + ',50%,50%,0.9)'
+        });
+        console.log('hsla(' + (i * 60) + ',50%,50%,0.9)');
+        console.log(crime_json["ps"]);
+        console.log(crime_json["crimes"]);
+      });
+      console.log(datasets[0]);
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          datasets: datasets
+        },
+        options: {
+          plugins: {
+            title: {
+              display: true,
+              text: ['Crime Chart', document.getElementById('description').textContent],
+              tooltip: "MMM D"
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              stacked: true,
+              ticks: {
+                callback: function(value) {
+                  if (value % 1 === 0) {
+                    return value;
+                  }
+                }
+              }
+            },
+            x: {
+              type: 'time',
+              time: {
+                unit: document.getElementById('time_unit').textContent
+              },
+              offset: true,
+              gridLines: {
+                offsetGridLines: true
+              },
+              stacked: true,
+            }
+          }
+        }
+      });
+      console.log("hi");
+    } else {
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          datasets: [{
+            label: 'Crimes',
+            data: crimes_json,
+            borderWidth: 2,
+            backgroundColor: "hsla(20,100%,80%,0.8)",
+            borderColor: "hsla(0,100%,50%,1)"
+          }]
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: true,
+              text: ['Crime Chart', document.getElementById('description').textContent],
+              tooltip: "MMM D"
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  if (value % 1 === 0) {
+                    return value;
+                  }
+                }
+              }
+            },
+            x: {
+              type: 'time',
+              offset: true,
+              gridLines: {
+                offsetGridLines: true
+              },
+              time: {
+                unit: document.getElementById('time_unit').textContent
+              },
+            }
+          }
+        }
+      });
+    }
+  </script>
+{% endblock inline_javascript %}

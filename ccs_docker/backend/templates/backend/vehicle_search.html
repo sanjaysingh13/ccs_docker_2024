@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Vehicle Search
+{% endblock title %}
+{% block content %}
+  <h3>Vehicle Search Form</h3>
+  {% crispy form form.helper %}
+{% endblock content %}

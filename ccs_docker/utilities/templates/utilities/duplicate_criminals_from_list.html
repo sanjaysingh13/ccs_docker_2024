@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Duplicate Criminals From List
+{% endblock title %}
+{% load static %}
+
+{% block content %}
+  <center>
+    <div>
+      <h2>Duplicate Criminals From List</h2>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 ">
+            <div class="form-floating">
+              <h5>
+                Put each uuid in new line and press Enter <small>(including last entry)</small>
+              </h5>
+              <textarea class="form-control" rows="10"  id="floatingTextarea"></textarea>
+            </div>
+          </br />
+          <button type="submit"
+                  class="btn btn-primary mb-3"
+                  id="merge_duplicate_criminals_by_list">Confirm</button>
+        </div>
+        <div class="col-sm-6 " id="criminals_from_uuid"></div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+</center>

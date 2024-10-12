@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-10 offset-sm-1">
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>
+            Search for a criminal (both simple, i.e. based on personal particulars and advanced, i.e. based on crime types)
+          </h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'searches:criminal_search' %}">Criminal Search</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>
+            Search for a crime (both simple, i.e. based on Police station, case No. and Year and advanced, i.e. based on types)
+          </h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'searches:crime_search' %}">Crime Search</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>Get crime charts for analysis</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'charts:crime_search' %}">Crime Charts</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>Add a criminal</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'backend:criminal-create' %}">Add a Criminal</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>Add a crime</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'backend:crime-create' %}">Add a Crime</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>Get the path linking two criminals (you must copy their IDs first from their profile page)</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'graphs:connection_of_criminals' %}">Connection 2 Criminals</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-8">
+          <h3>Get likely associates of a criminal in a PS</h3>
+        </div>
+        <div class="col-sm-4">
+          <h3>
+            <a href="{% url 'graphs:criminal_associates_in_ps' %}">Connection Criminal-PS</a>
+          </h3>
+        </div>
+      </div>
+      <hr />
+      <div class="row">
+        <div class="col-sm-4">
+          <h3>Court dates calendar</h3>
+        </div>
+        <div class="col-sm-8">
+          <h6>Select unit</h6>
+          <form method="post">
+            {% csrf_token %}
+            {% crispy form form.helper %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

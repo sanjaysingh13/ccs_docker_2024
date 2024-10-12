@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Daily Report
+{% endblock title %}
+{% block content %}
+  <div class="container">
+    <h6>{{ title }}</h6>
+    <span id="daily_report_task_id" class="d-none">{{ task_id }}</span>
+    <form method="post">
+      {% csrf_token %}
+      {% crispy daily_report_form daily_report_form.helper %}
+    </form>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-success d-none" role="status"></div>
+    </div>
+    <div class="tbl_daily_report"></div>
+  </div>
+{% endblock content %}
+{% block inline_javascript %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var taskId = document.getElementById('daily_report_task_id').textContent;
+      if (taskId) {
+        var spinner = document.querySelector('.spinner-border');
+        var resultTable = document.querySelector('.tbl_daily_report');
+
+        if (resultTable.innerHTML.trim() === '') {
+          spinner.classList.remove('d-none');
+        }
+
+        var pollInterval = setInterval(pollCeleryTask, 1000);
+
+        function pollCeleryTask() {
+          fetch('/ajax/get_daily_report/?task_id=' + taskId)
+            .then(response => response.json())
+            .then(data => {
+              if (data.state === "SUCCESS") {
+                spinner.classList.add('d-none');
+                var dailyReport = data.info;
+                var tbl = '<table class="table table-hover table-condensed table-responsive table-striped">';
+
+                tbl += '<thead><tr><th>Sl No.</th><th>Case</th><th>Classification</th><th>Gist</th><th>Arrests</th></tr></thead>';
+                tbl += '<tbody>';
+
+                dailyReport.forEach((val, index) => {
+                  tbl += '<tr>';
+                  tbl += '<td>' + (index + 1) + '</td>';
+                  tbl += '<td><a href="/backend/crimes/' + val[4] + '">' + val[3] + '</a></td>';
+                  tbl += '<td class="' + val[2] + '">' + val[1] + '</td>';
+                  tbl += '<td>' + val[6] + '</td>';
+                  tbl += '<td>' + val[5] + '</td>';
+                  tbl += '</tr>';
+                });
+
+                tbl += '</tbody></table>';
+                resultTable.innerHTML = tbl;
+                clearInterval(pollInterval);
+              }
+            });
+        }
+      }
+    });
+  </script>
+{% endblock inline_javascript %}

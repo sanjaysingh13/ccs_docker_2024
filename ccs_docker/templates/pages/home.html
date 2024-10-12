@@ -1,0 +1,86 @@
+{% extends "base_welcome.html" %}
+
+{% load static %}
+{% load static i18n %}
+
+{% block content %}
+  <!-- Callout -->
+  <aside class="callout">
+    <div class="text-vertical-center">
+      <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+      <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-nav-item">
+            <a href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'searches:crime_search' %}">Crime Search</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'searches:criminal_search' %}">Criminal Search</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'charts:crime_search' %}">Crime Chart</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'backend:crime-create' %}">Add Crime</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'backend:criminal-create' %}">Add Criminal</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'graphs:connection_of_criminals' %}">Connection 2 Criminals</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'graphs:criminal_associates_in_ps' %}">Connection Criminal-PS</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'backend:daily_report' %}">Daily Report</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'backend:start' %}">Court Dates</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'backend:vehicle_search' %}">Vehicle Search</a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a href="{% url 'maps:police_stations' %}" target="_blank">Police Stations</a>
+          </li>
+        </ul>
+      </nav>
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1>Crime Criminal Search</h1>
+      <br />
+      <br />
+      <h2>everything is connected</h2>
+      <br />
+      <br />
+      <br />
+      <br />
+      <a class="btn btn-dark btn-lg text-center" href="{% url 'home_old' %}">Find Out More</a>
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'account_logout' %}" class="btn btn-lg btn-dark">{% trans "Sign Out" %}</a>
+      {% else %}
+        <a href="{% url 'account_signup' %}?next={{ request.path }}"
+           class="btn btn-lg btn-dark">Sign Up</a>
+        <a href="{% url 'account_login' %}?next={% url 'backend:start' %}"
+           class="btn btn-lg btn-dark">Login</a>
+      {% endif %}
+    </div>
+  </aside>
+  <section class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <p class="lead">
+            The first version of CCS was created for the use of police officers of West Bengal by <strong>Shri Sanjay Singh</strong>, IPS, (WB:1992), and went online in August, 2015.
+          </p>
+          <p class="lead">This is version 2, and it uses Graph Theory to explore deeper criminal connections.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

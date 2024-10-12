@@ -1,0 +1,50 @@
+exclude: '^docs/|/migrations/|devcontainer.json'
+default_stages: [pre-commit]
+
+default_language_version:
+  python: python3.12
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: detect-private-key
+
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: '1.21.0'
+    hooks:
+      - id: django-upgrade
+        args: ['--target-version', '5.0']
+
+  # Run the Ruff linter.
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      # Linter
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix, "--extend-ignore=E501,F541,E722,E203,N806,FBT002,T201,S105,DTZ007,PD901,DTZ011,ERA001,BLE001,PLR0913,PLR2004,PLR0912,C901,EM101,TRY003,PLR0915,COM812,ISC001,RET505,RET504,S311,N803,EM102,E712,S106,PT004,FBT001,TRY004,PLR0911,TRY300,G004,N999,PD010,DJ008,TCH002,SLF001,FBT003,RUF005,N815,DJ012,RET503"]
+      # Formatter
+      - id: ruff-format
+
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.35.2
+    hooks:
+      - id: djlint-reformat-django
+      - id: djlint-django
+        args: [ "--ignore=H021,H031,H029,H030,H006"]
+
+# sets up .pre-commit-ci.yaml to ensure pre-commit dependencies stay up to date
+ci:
+  autoupdate_schedule: weekly
+  skip: []
+  submodules: false

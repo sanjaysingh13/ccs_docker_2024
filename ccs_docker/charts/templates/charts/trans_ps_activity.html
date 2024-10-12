@@ -1,0 +1,112 @@
+{% extends "base_charts.html" %}
+
+{% block title %}
+  Trans-PS Activity
+{% endblock title %}
+{% block content %}
+  {{ trans_ps_activity|json_script:"trans_ps_activity" }}
+  <div class="container">
+    <h2>{{ title|safe }}</h2>
+    <p>(Base period: 01-01-2011 : till date)</p>
+    <div class="row">
+      <div class="col-sm-9">
+        <p>
+          <i>{{ subtitle }}</i>
+        </p>
+      </div>
+      {% if link %}
+        <div class="col-sm-3">
+          <a href="{% url 'charts:trans_ps_activity' %}?q={{ link }}"
+             class="btn btn-info">Get {{ link }} PSs</a>
+        </div>
+      {% endif %}
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block inline_javascript %}
+  <script type="module">
+    const trans_ps_activity = JSON.parse(document.getElementById('trans_ps_activity').textContent);
+    const ctx = document.getElementById('myChart').getContext('2d');
+
+    const labels = trans_ps_activity.labels;
+    const chartData = trans_ps_activity.data;
+
+    const data = {
+      labels: labels,
+      datasets: [{
+        label: 'Crimes',
+        data: chartData,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(255, 159, 64, 0.2)',
+          'rgba(255, 205, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(54, 162, 235, 0.2)'
+        ],
+        borderColor: [
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 99, 132)',
+          'rgb(255, 159, 64)',
+          'rgb(255, 205, 86)',
+          'rgb(75, 192, 192)',
+          'rgb(54, 162, 235)'
+        ],
+        borderWidth: 1
+      }]
+    };
+
+    const config = {
+      type: 'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: '20 PSs where most crimes are committed by outside criminals'
+          }
+        }
+      },
+    };
+
+    new Chart(ctx, config);
+  </script>
+{% endblock inline_javascript %}

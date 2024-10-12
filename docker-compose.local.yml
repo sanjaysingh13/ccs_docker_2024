@@ -1,0 +1,102 @@
+volumes:
+  ccs_docker_local_postgres_data: {}
+  ccs_docker_local_postgres_data_backups: {}
+  ccs_docker_local_redis_data: {}
+  ccs_docker_local_neo4j_data: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: ccs_docker_local_django
+    container_name: ccs_docker_local_django
+    depends_on:
+      - postgres
+      - redis
+      - neo4j
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+      - ./.envs/.local/.neo4j  # Add this line
+    ports:
+      - '8000:8000'
+    command: /start
+    environment:
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=decadent
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/local/postgres/Dockerfile
+    volumes:
+      - ccs_docker_local_postgres_data:/var/lib/postgresql/data
+    env_file:
+      - ./.envs/.local/.postgres
+
+  redis:
+    image: docker.io/redis:6
+    container_name: ccs_docker_local_redis
+
+    volumes:
+      - ccs_docker_local_redis_data:/data
+
+
+  celeryworker:
+    <<: *django
+    image: ccs_docker_local_celeryworker
+    container_name: ccs_docker_local_celeryworker
+    depends_on:
+      - redis
+      - postgres
+      - neo4j
+    ports: []
+    command: /start-celeryworker
+    environment:
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=decadent
+
+  celerybeat:
+    <<: *django
+    image: ccs_docker_local_celerybeat
+    container_name: ccs_docker_local_celerybeat
+    depends_on:
+      - redis
+      - postgres
+      - neo4j
+    ports: []
+    command: /start-celerybeat
+    environment:
+      - NEO4J_USERNAME=neo4j
+      - NEO4J_PASSWORD=decadent
+
+  flower:
+    <<: *django
+    image: ccs_docker_local_flower
+    container_name: ccs_docker_local_flower
+    ports:
+      - '5555:5555'
+    command: /start-flower
+
+  neo4j:
+    image: neo4j:5.11.0
+    container_name: ccs_docker_local_neo4j
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ccs_docker_local_neo4j_data:/data
+      - ./neo4j/plugins:/plugins  # Add this line
+    environment:
+      - NEO4J_AUTH=neo4j/decadent
+      - NEO4J_server_memory_pagecache_size=512M
+      - NEO4J_server_memory_heap_initial__size=512M
+      - NEO4J_server_memory_heap_max__size=512M
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*  # Add this line
+      - NEO4J_dbms_security_procedures_allowlist=apoc.*  # Add this line
+      - NEO4J_apoc_export_file_enabled=true  # Add this line
+      - NEO4J_apoc_import_file_enabled=true  # Add this line
+      - NEO4J_apoc_import_file_use__neo4j__config=true  # Add this line

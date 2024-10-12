@@ -1,0 +1,36 @@
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+
+.custom-combobox-input {
+	margin: 0;
+	padding: 5px 10px;
+}
+
+.subitems {
+	background: white;
+	color: indianred;
+}
+
+hr {
+	border-width: 2px;
+}
+
+th .current {
+	padding-right: 12px;
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+
+ .red {
+	color: red;
+}

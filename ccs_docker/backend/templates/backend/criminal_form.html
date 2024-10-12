@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Add Criminal
+{% endblock title %}
+{% block content %}
+  <span id="deletion_power" class="d-none">{{ deletion_power }}</span>
+  <h6>Add Criminal</h6>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% crispy criminalform criminalform.helper %}
+    {% crispy imagesform %}
+    {% crispy addressform addressform_helper %}
+    <h6>Crimes</h6>
+    {% crispy formset helper %}
+    <input type="submit" value="Save" />
+  </form>
+{% endblock content %}

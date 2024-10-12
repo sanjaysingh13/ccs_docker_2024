@@ -1,0 +1,15 @@
+{% extends "base_graphs.html" %}
+
+{% block title %}
+  Criminal's Associates in PS
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% crispy form form.helper %}
+  <div class="d-flex justify-content-center">
+    <div class=" spinner-border text-success"
+         role="status"
+         style="display:none"></div>
+  </div>
+{% endblock content %}

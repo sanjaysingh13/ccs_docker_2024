@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Add Final Form
+{% endblock title %}
+{% block content %}
+  <h6>Add Final Form</h6>
+  <form method="post">
+    {% csrf_token %}
+    <h5>{{ case }}</h5>
+    {% crispy crimeform crimeform.helper %}
+    <h6>Criminals</h6>
+    {% crispy formset helper %}
+    <input type="submit" value="Save" />
+  </form>
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Court Date Calendar
+{% endblock title %}
+{% block content %}
+  <center>
+    <div id="jobs">
+      <h2>Court Date Calendar</h2>
+      <div class="row">
+        <div class="col-sm-2">
+          <h2 id="month">
+            <a href="{% url 'backend:court-date-calendar-nav' unique_id=unique_id year=year month=prev_month %}">Prev</a>
+          </h2>
+        </div>
+        <div class="col-sm-2 offset-sm-8">
+          <h2 id="month">
+            <a href="{% url 'backend:court-date-calendar-nav' unique_id=unique_id year=year month=next_month %}">Next</a>
+          </h2>
+        </div>
+      </div>
+    </div>
+    {{ calendar|safe }}
+  </center>
+{% endblock content %}

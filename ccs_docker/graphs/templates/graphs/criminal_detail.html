@@ -1,0 +1,107 @@
+{% extends "base_graphs.html" %}
+
+{% block title %}
+  {{ object }}
+{% endblock title %}
+{% block content %}
+  {{ network|json_script:"network" }}
+  <div class="row">
+    <div class="col-sm-6">
+      <h3>{{ object }}</h3>
+      <p>
+        <strong>Id Marks:</strong>
+      </p>
+      <ul>
+        {% for idm in identification_marks %}<li>{{ idm.id_mark }}</li>{% endfor %}
+      </ul>
+      <p>
+        <strong>Aliases:</strong> {{ object.aliases }}
+      </p>
+      {% if object.birth_date %}
+        <p>
+          <strong>DOB:</strong> {{ object.birth_date|date:"D d M Y" }}
+        </p>
+      {% endif %}
+      <a href="{% url 'backend:criminal-edit' unique_id=object.uuid %}"
+         class="btn btn-info">Edit</a>
+      <a href="{% url 'graphs:network_of_criminal' unique_id=object.uuid %}"
+         class="btn btn-info">Network of Criminal</a>
+      <a href="{% url 'pdf:criminal-detail-pdf' uuid=object.uuid %}"
+         class="btn btn-info">PDF</a>
+      <span class="d-none" data-criminal-uuid="{{ object.uuid }}"></span>
+      <button class="btn btn-info js-copy-id">Copy ID</button>
+    </div>
+    <div class="col-sm-6">
+      {% if album %}
+        <div id="criminalCarousel" class="carousel slide" data-ride="carousel">
+          <ol class="carousel-indicators">
+            {% for idx, image in album %}
+              <li data-target="#criminalCarousel"
+                  data-slide-to="{{ idx }}"
+                  {% if idx == 0 %}class="active"{% endif %}></li>
+            {% endfor %}
+          </ol>
+          <div class="carousel-inner" role="listbox">
+            {% for idx, image in album %}
+              <div class="carousel-item {% if idx == 0 %}active{% endif %}">
+                <img src="{{ image }}"
+                     class="img-fluid"
+                     alt="Criminal image {{ idx }}"
+                     style="width: 400px;
+                            height: auto" />
+              </div>
+            {% endfor %}
+          </div>
+          <a class="carousel-control-prev"
+             href="#criminalCarousel"
+             role="button"
+             data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next"
+             href="#criminalCarousel"
+             role="button"
+             data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+      {% else %}
+        <p>No images available</p>
+      {% endif %}
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h3>Crime Chart</h3>
+        <p>
+          <strong>Crime Node (yellow):</strong> 1. Hover to see full case reference 2. Click to see gist 3. Click and hold to navigate
+        </p>
+        <p>
+          <strong>Criminal Node (blue):</strong> 1. Hover to see full particulars 2. Click and hold to navigate
+        </p>
+        <div id="crimeNetwork"></div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
+{% block extra_js %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const copyButton = document.querySelector('.js-copy-id');
+      const criminalUuid = document.querySelector('[data-criminal-uuid]').dataset.criminalUuid;
+
+      copyButton.addEventListener('click', function() {
+        navigator.clipboard.writeText(criminalUuid).then(function() {
+          alert('Criminal ID copied to clipboard');
+        }, function(err) {
+          console.error('Could not copy text: ', err);
+        });
+      });
+
+      // Add your crime network visualization code here
+    });
+  </script>
+{% endblock extra_js %}

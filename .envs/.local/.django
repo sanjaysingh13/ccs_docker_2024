@@ -1,0 +1,21 @@
+# General
+# ------------------------------------------------------------------------------
+USE_DOCKER=yes
+IPYTHONDIR=/app/.ipython
+# Redis
+# ------------------------------------------------------------------------------
+REDIS_URL=redis://redis:6379/0
+
+# Celery
+# ------------------------------------------------------------------------------
+
+# Flower
+CELERY_FLOWER_USER=OYokaKspJnFbzcOQgGpLtkbOKQSfHlJJ
+CELERY_FLOWER_PASSWORD=u4843qI18a4npy6edGHyRRH5LITsXbpHiok6MnndVEahr0FMJmUZqtKC5nuoa0ZO
+
+# Mapbox
+MAP_BOX_ACCESS_TOKEN=pk.eyJ1Ijoic2FuamF5c2luZ2gxMyIsImEiOiJja3ZrdTk1cmQwZjdnMnhvNTQ2YzNmMWh5In0.TImoeIojgS5a_yMPTT7BJw
+
+# ReCaptcha
+RECAPTCHA_PRIVATE_KEY=6LewtCIkAAAAAHFOSySCzt0SX78hu4JyZTl9vIuF
+RECAPTCHA_PUBLIC_KEY=6LewtCIkAAAAAIQeuIEEpIhOHZP8_DYbxPx6zFTo

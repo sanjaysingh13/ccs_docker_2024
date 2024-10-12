@@ -1,0 +1,848 @@
+{% extends "base_welcome.html" %}
+
+{% load cache %}
+{% load static %}
+
+{% cache 1000000000 home %}
+{% block content %}
+  <aside>
+    <a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-item">
+          <a href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'searches:crime_search' %}">Crime Search</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'searches:criminal_search' %}">Criminal Search</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'backend:crime-create' %}">Add Crime</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'backend:criminal-create' %}">Add Criminal</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'graphs:connection_of_criminals' %}">Connections</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'backend:daily_report' %}">Daily Report</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'backend:start' %}">Court Dates</a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="{% url 'backend:vehicle_search' %}">Vehicle Search</a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <header id="top" class="header">
+    <br />
+    <div class="text-vertical-center">
+      <div class="container">
+        <div class="row d-none d-sm-block">
+          <br />
+          <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+          <svg enable-background="new 0 0 900 200"
+               height="20%"
+               id="Layer_1"
+               version="1.1"
+               viewBox="0 0 900 200"
+               width="90%"
+               xml:space="preserve"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g style="overflow:hidden; text-anchor: middle; font-size:600%; font-family: 'Trebuchet MS', sans-serif">
+            <defs>
+            <filter id="glow4" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="10 10" result="glow" />
+            <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            </feMerge>
+            </filter>
+            <filter id="glow5" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="5 5" result="glow" />
+            <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            </feMerge>
+            </filter>
+            <filter id="glow6" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="1 1" result="glow" />
+            </filter>
+            <mask id="textMask">
+            <text style="fill:white;" x="52%" y="57%">Crime Criminal Search</text>
+            </mask>
+            </defs>
+            <text style="filter: url(#glow4); fill: #0f9" x="52%" y="57%"><animate attributeName="x" attributeType="XML" from="51.7%"  to="52.3%" begin="0s" dur=".01s" fill="remove" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML" from="56.9%"  to="57.1%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" />Crime Criminal Search</text>
+            <text style="filter: url(#glow5); fill: #03f" x="52%" y="57%"><animate attributeName="x" attributeType="XML" from="51.9%"  to="52.1%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML" from="56.95%"  to="57.05%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" />Crime Criminal Search</text>
+            <text x="52%" y="57%" style="fill: white">Crime Criminal Search</text>
+            <g mask="url(#textMask)">
+            <g style="filter: url(#glow6);">
+            <text style="fill: white" x="52%" y="57%">Crime Criminal Search</text>
+            </g>
+            </g>
+            </g>
+          </svg>
+        </div>
+        <div class="row d-sm-none">
+          <br />
+          <?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'>
+          <svg enable-background="new 0 0 900 600"
+               height="60%"
+               id="Layer_1"
+               version="1.1"
+               viewBox="0 0 900 600"
+               width="90%"
+               xml:space="preserve"
+               xmlns="http://www.w3.org/2000/svg"
+               xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g style="overflow:hidden; text-anchor: middle; font-size:800%; font-family: 'Trebuchet MS', sans-serif">
+            <defs>
+            <filter id="glow1" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="10 10" result="glow" />
+            <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            </feMerge>
+            </filter>
+            <filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="5 5" result="glow" />
+            <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            </feMerge>
+            </filter>
+            <filter id="glow3" x="-10%" y="-10%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="1 1" result="glow" />
+            </filter>
+            <mask id="textMask1">
+            <text style="fill:white;" x="52%" y="47%">Crime Criminal </text>
+            </mask>
+            <mask id="textMask2">
+            <text style="fill:white;" x="47%" y="87%">Search </text>
+            </mask>
+            </defs>
+            <text style="filter: url(#glow1); fill: #0f9" x="52%" y="47%"><animate attributeName="x" attributeType="XML" from="51.7%"  to="52.3%" begin="0s" dur=".01s" fill="remove" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML" from="46.9%"  to="47.1%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" />Crime Criminal  </text>
+            <text style="filter: url(#glow2); fill: #03f" x="52%" y="57%"><animate attributeName="x" attributeType="XML" from="51.9%"  to="52.1%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML" from="46.95%"  to="47.05%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" />Crime Criminal  </text>
+            <text x="52%" y="47%" style="fill: white">Crime Criminal  </text>
+            <g mask="url(#textMask1)">
+            <g style="filter: url(#glow3);">
+            <text style="fill: white" x="52%" y="47%">Crime Criminal  </text>
+            </g>
+            </g>
+            <!-- -->
+            <text style="filter: url(#glow1); fill: #0f9" x="47%" y="87%"><animate attributeName="x" attributeType="XML" from="46.7%"  to="47.3%" begin="0s" dur=".01s" fill="remove" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML" from="86.9%"  to="87.1%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" /> Search</text>
+            <text style="filter: url(#glow2); fill: #03f" x="47%" y="87%"><animate attributeName="x" attributeType="XML" from="46.9%"  to="47.1%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" /><animate attributeName="y" attributeType="XML" from="86.95%"  to="87.05%" begin="0s" dur=".05s" fill="remove" repeatCount="indefinite" /> Search</text>
+            <text x="47%" y="87%" style="fill: white"> Search</text>
+            <g mask="url(#textMask2)">
+            <g style="filter: url(#glow3);">
+            <text style="fill: white" x="47%" y="87%"> Search</text>
+            <!-- -->
+            </g>
+            </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <h3 class="text-center">Information At Your Fingertips</h3>
+      <br />
+    </div>
+  </header>
+  <section id="about" class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <p class="lead">As a citizen, you can do the following without logging in:</p>
+          <ol>
+            <li class="lead">
+              Search for the involvement of any vehicle in crimes in West Bengal against a database of {{ vehicle_count }} vehicles by visiting <a href="{% url 'backend:vehicle_search' %}">Vehicle Search</a>
+            </li>
+            <!-- <li class="lead">Help the police by answering some <%= link_to "Unsolved Clues", '/clues' %>.</li> -->
+            <li class="lead">
+              Locate any police station in West Bengal on the map, and get information about it by visiting  <a class="nav-link"
+     href="{% url 'maps:police_stations' %}"
+     target="_blank">Police Stations</a>
+            </li>
+            <!-- <li class="lead">Search for the law related to any subject at  <%#= link_to "Law Search", pages_path("lexic"), 'data-turbolinks' => false %>.</li> -->
+            <!-- <li class="lead">See a Heat-Map showing the concentration of locations of road-robberies in West Bengal at <%= link_to "Crime Heat Map", '/activities/heat_map', 'data-turbolinks' => false %></li> -->
+          </ol>
+          <br />
+          <p class="lead">
+            For authorized police-officers, it is a web-accessible database of {{ crime_count }} records of crimes, {{ criminal_count }} criminals, and {{ involvement_count }} linkages between the two.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <p class="lead">
+            This application was created for the use of police officers of West Bengal by <strong>Shri Sanjay Singh</strong>, IPS, (WB:1992), and went online in August, 2015.
+          </p>
+          <div class="row">
+            <div class="col-sm-8 text-center">
+              <p class="lead">
+                It was nominated for DG, NCRB's trophy for in-house IT development in the same year, and was shortlisted in the 5-best applications from amongst 47 entries sent by 19 police organisations across the country. It received high commendation from DG, NCRB.
+              </p>
+            </div>
+            <div class="col-sm-4 text-center">
+              <img src="{% static 'images/dg_ncrb.jpg' %}"
+                   alt="DG NCRB commendation"
+                   class="img-fluid"
+                   width="300"
+                   height="auto" />
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-sm-8 text-center">
+              <p class="lead">
+                The project, and its adoption by all police-officers of West Bengal, was made possible due to the support of the following officers:
+              </p>
+              <p class="lead">
+                <strong>Shri Virendra</strong>, IPS, DG&IGP (WB) - for his continued support and encouragement, and for launching the iOS app for CCS on Jun, 06, 2018.
+              </p>
+            </div>
+            <div class="col-sm-4 text-center">
+              <img src="{% static 'images/shri_virendra.jpg' %}"
+                   alt="Shri Virendra"
+                   class="img-fluid"
+                   width="300"
+                   height="auto" />
+            </div>
+          </div>
+          <br />
+          <br />
+          <div class="row">
+            <div class="col-sm-12 text-center">
+              <p class="lead">
+                <strong>Shri Surajit Kar Purkayastha</strong>, IPS, former-DG&IGP (WB) - for his support and encouragement, and for launching the app formally on Oct, 26, 2016.
+              </p>
+              <p class="lead">
+                <strong>Shri G.M.P. Reddy</strong>, IPS, former-DG&IGP (WB) - for his motivation, guidance and support.
+              </p>
+              <p class="lead">
+                <strong>Shri Adhir Sharma</strong>, IPS, former-ADGP (Correctional Services) - for liberally sharing data from Correctional Homes databases.
+              </p>
+              <p class="lead">
+                <strong>Shri Rajeev Kumar</strong>, IPS, CP (Kolkata) - who is the main driving force behind the project, and guided the entire process from design to conception. He also provided all the logistics support required by the project.
+              </p>
+              <p class="lead">
+                <strong>Shri Rajesh Kumar</strong>, IPS, former ADG (CID) - who has given invaluable ideas for addition of features to the application, and has spear-headed the drive for popularisation of the application.
+              </p>
+            </div>
+          </div>
+          <br />
+          <br />
+          <p class="lead">
+            Thanks are due to the following police-personnel of CID for their hard-work in the data-entry required by the application:
+          </p>
+          <p class="lead">
+            SI Tapan Kr Dey
+            (O/C Database Cell), SI Maharshi Pattrea (O/C Computers), ASI Tripti Eswarary, ASI Srimanta Sardar, Shri Anjan Ganguly, Shri Subhasish Dey, Shri Souvik Chakravarty, Smt Moumita Dey and Smt Padmabati Pal.
+          </p>
+          <p class="lead">
+            Thanks are also due to Shri Sourav Roy and Shri Subhankar Maji, software developers of CID for developing the android app for CCS.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <aside class="call-to-action ">
+    <div class="container">
+      <div class="row">
+        <p class="lead">
+          CCS started from about 1.5 lakh records of criminals in 2015 and has grown to to about 8 lakh in 2021..
+        </p>
+        <p class="lead">All Made possible because of these users !</p>
+        <table class="table table-condensed table-responsive table-striped ">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Criminals Added</th>
+              <th>Photographs Added</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Crime Records Section</td>
+              <td>crsddhpc@gmail.com</td>
+              <td>5301</td>
+              <td>6552</td>
+            </tr>
+            <tr>
+              <td>OC, Database Cell,</td>
+              <td>crime.criminal.database@gmail.com</td>
+              <td>201873</td>
+              <td>5358</td>
+            </tr>
+            <tr>
+              <td>Special Operation group, D/Dinajpur</td>
+              <td>sogblgdd@gmail.com</td>
+              <td>3373</td>
+              <td>4445</td>
+            </tr>
+            <tr>
+              <td>DC, DD, Bidhannagar PC</td>
+              <td>dcddbdnpc@gmail.com</td>
+              <td>1970</td>
+              <td>1995</td>
+            </tr>
+            <tr>
+              <td>Inspr. Debasish Chattaraj</td>
+              <td>tusharkar000@gmail.com</td>
+              <td>1253</td>
+              <td>1231</td>
+            </tr>
+            <tr>
+              <td>Tushar Kanti Paria</td>
+              <td>dcrbpaschim2000@gmail.com</td>
+              <td>5829</td>
+              <td>1202</td>
+            </tr>
+            <tr>
+              <td>Inspr. Sanjib Chakraborty</td>
+              <td>sonarpurps@gmail.com</td>
+              <td>5368</td>
+              <td>1052</td>
+            </tr>
+            <tr>
+              <td>SI Bimalesh Halder</td>
+              <td>dcrbjhargram@gmail.com</td>
+              <td>1378</td>
+              <td>1016</td>
+            </tr>
+            <tr>
+              <td>Inspr. Deb Kumar Roy</td>
+              <td>baruipurps@gmail.com</td>
+              <td>2056</td>
+              <td>1014</td>
+            </tr>
+            <tr>
+              <td>SI Utpal Kr. Saha</td>
+              <td>bagdahpolicestation@gmail.com</td>
+              <td>959</td>
+              <td>867</td>
+            </tr>
+            <tr>
+              <td>Rahul Goswami</td>
+              <td>acp1ddbdn@gmail.com</td>
+              <td>784</td>
+              <td>853</td>
+            </tr>
+            <tr>
+              <td>DCRB, Howrah Rural</td>
+              <td>dcrbrural@gmail.com</td>
+              <td>3192</td>
+              <td>821</td>
+            </tr>
+            <tr>
+              <td>SI Pradip Paul</td>
+              <td>ockashipurps@gmail.com</td>
+              <td>4182</td>
+              <td>627</td>
+            </tr>
+            <tr>
+              <td>Inspr. Atibur Rahaman</td>
+              <td>canningps2013@gmail.com</td>
+              <td>2943</td>
+              <td>582</td>
+            </tr>
+            <tr>
+              <td>SI Sumit Biswas</td>
+              <td>sagardighips@gmail.com</td>
+              <td>4823</td>
+              <td>568</td>
+            </tr>
+            <tr>
+              <td>SI Kunal Biswas</td>
+              <td>pssaktigarh@gmail.com</td>
+              <td>1466</td>
+              <td>537</td>
+            </tr>
+            <tr>
+              <td>Tapan Kr. Dey</td>
+              <td>deykumartapan@gmail.com</td>
+              <td>836</td>
+              <td>499</td>
+            </tr>
+            <tr>
+              <td>S.I. Debanjan Bhattacherjee</td>
+              <td>psmogra@policewb.gov.in</td>
+              <td>483</td>
+              <td>460</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Dibyendu Das</td>
+              <td>psserampore@policewb.gov.in</td>
+              <td>541</td>
+              <td>452</td>
+            </tr>
+            <tr>
+              <td>SI Sudipta Mukherjee</td>
+              <td>psmemari@gmail.com</td>
+              <td>653</td>
+              <td>451</td>
+            </tr>
+            <tr>
+              <td>S.I Suman Kumar Kundu</td>
+              <td>pspandua@policewb.gov.in</td>
+              <td>760</td>
+              <td>416</td>
+            </tr>
+            <tr>
+              <td>SI Biplab Halder</td>
+              <td>biplabhaldercs@gmail.com</td>
+              <td>270</td>
+              <td>395</td>
+            </tr>
+            <tr>
+              <td>SI Tuhin Das</td>
+              <td>tuhindas705@gmail.com</td>
+              <td>408</td>
+              <td>391</td>
+            </tr>
+            <tr>
+              <td>SI Loknath Ghosh</td>
+              <td>loknath.police@gmail.com</td>
+              <td>383</td>
+              <td>387</td>
+            </tr>
+            <tr>
+              <td>SI Arnab Dutta</td>
+              <td>abhijithaitdumdum@gmail.com</td>
+              <td>300</td>
+              <td>378</td>
+            </tr>
+            <tr>
+              <td>SI Sanjib De</td>
+              <td>psjamuria@gmail.com</td>
+              <td>405</td>
+              <td>372</td>
+            </tr>
+            <tr>
+              <td>Inspr. SHRI AVIJIT HAIT</td>
+              <td>icramnagarpss24pgs@gmail.com</td>
+              <td>1302</td>
+              <td>362</td>
+            </tr>
+            <tr>
+              <td>Inspr. Syed Rejaul Kabir</td>
+              <td>bhangoreps1@gmail.com</td>
+              <td>2150</td>
+              <td>353</td>
+            </tr>
+            <tr>
+              <td>Souvik Chakraborty</td>
+              <td>souvik.chakraborty90@gmail.com</td>
+              <td>600</td>
+              <td>326</td>
+            </tr>
+            <tr>
+              <td>Shri Nanda Dulal Ghosh</td>
+              <td>pslaketown@policewb.gov.in</td>
+              <td>224</td>
+              <td>313</td>
+            </tr>
+            <tr>
+              <td>Inspr. Md. Abdur Rob Khan</td>
+              <td>basantipolicestation@gmail.com</td>
+              <td>7253</td>
+              <td>309</td>
+            </tr>
+            <tr>
+              <td>Insp. Deb Kumar Roy</td>
+              <td>debkumarroy93@gmail.com</td>
+              <td>352</td>
+              <td>309</td>
+            </tr>
+            <tr>
+              <td>SI Barun Mitra</td>
+              <td>psbalagarh@policewb.gov.in</td>
+              <td>320</td>
+              <td>306</td>
+            </tr>
+            <tr>
+              <td>SI Tulsi Das Laha</td>
+              <td>dasprasanta58@yahoo.com</td>
+              <td>287</td>
+              <td>299</td>
+            </tr>
+            <tr>
+              <td>Subhasis Dey</td>
+              <td>dey.sbhss@gmail.com</td>
+              <td>749</td>
+              <td>298</td>
+            </tr>
+            <tr>
+              <td>SI Sumit Talukdar</td>
+              <td>psraninagar@gmail.com</td>
+              <td>1916</td>
+              <td>272</td>
+            </tr>
+            <tr>
+              <td>Inspr. Uday Sankar Ghosh</td>
+              <td>psfarakkaic@gmail.com</td>
+              <td>1324</td>
+              <td>271</td>
+            </tr>
+            <tr>
+              <td>SI Ayan Chakraborty</td>
+              <td>ashoknagarthana@gmail.com</td>
+              <td>268</td>
+              <td>270</td>
+            </tr>
+            <tr>
+              <td>S.I. Arnab Dutta</td>
+              <td>grpsbaruipur@gmail.com</td>
+              <td>201</td>
+              <td>267</td>
+            </tr>
+            <tr>
+              <td>SI Soumen Biswas</td>
+              <td>psgosaba@gmail.com</td>
+              <td>2714</td>
+              <td>251</td>
+            </tr>
+            <tr>
+              <td>SI Sourav Kr Chattopadhyay</td>
+              <td>pskaliganjnadia@gmail.com</td>
+              <td>2078</td>
+              <td>242</td>
+            </tr>
+            <tr>
+              <td>Shri Badana Varun Chandra Sekhar, IPS</td>
+              <td>srpsealdahwbp@gmail.com</td>
+              <td>204</td>
+              <td>240</td>
+            </tr>
+            <tr>
+              <td>SI Sk. Afroj Hossain</td>
+              <td>ocdubrajpurps@policewb.gov.in</td>
+              <td>220</td>
+              <td>220</td>
+            </tr>
+            <tr>
+              <td>SI Abhijit Biswas</td>
+              <td>pstaherpurnadia@gmail.com</td>
+              <td>219</td>
+              <td>209</td>
+            </tr>
+            <tr>
+              <td>S.I. Hrickbed Saha</td>
+              <td>sonarpurgrps@gmail.com</td>
+              <td>213</td>
+              <td>209</td>
+            </tr>
+            <tr>
+              <td>SI Uttal Samanta</td>
+              <td>dewandighips@gmail.com</td>
+              <td>954</td>
+              <td>204</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Suprakas Pattanayak</td>
+              <td>psuttarpara@policewb.gov.in</td>
+              <td>407</td>
+              <td>200</td>
+            </tr>
+            <tr>
+              <td>Shri Shyamal Chandra Das</td>
+              <td>dddarjeeling.cidwb@gmail.com</td>
+              <td>298</td>
+              <td>199</td>
+            </tr>
+            <tr>
+              <td>Shri Bindu Bhushan Nandi</td>
+              <td>ddsouthdinajpur.cidwb@gmail.com</td>
+              <td>187</td>
+              <td>196</td>
+            </tr>
+            <tr>
+              <td>DCRB Howrah GRP</td>
+              <td>dcrbhwhgrp@gmail.com</td>
+              <td>207</td>
+              <td>193</td>
+            </tr>
+            <tr>
+              <td>Inspr. Ardhendu Sekhar De Sarkar</td>
+              <td>kultalipswbpolice@gmail.com</td>
+              <td>587</td>
+              <td>182</td>
+            </tr>
+            <tr>
+              <td>SI Jayanta Pal</td>
+              <td>pschanditala@policewb.gov.in</td>
+              <td>403</td>
+              <td>182</td>
+            </tr>
+            <tr>
+              <td>Inspr. Sri. Ashis Deb</td>
+              <td>icmsdps@gmail.com</td>
+              <td>187</td>
+              <td>181</td>
+            </tr>
+            <tr>
+              <td>SI Bidyut Sanfui</td>
+              <td>dipakpaik50@gmail.com</td>
+              <td>262</td>
+              <td>176</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Bipul Sinha</td>
+              <td>banarhatps@gmail.com</td>
+              <td>314</td>
+              <td>175</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Nandan Panigrahi</td>
+              <td>ocbhadreswarps@gmail.com</td>
+              <td>258</td>
+              <td>172</td>
+            </tr>
+            <tr>
+              <td>Special Crime Cell Bankura</td>
+              <td>specialcrimecellbankura@gmail.com</td>
+              <td>619</td>
+              <td>164</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Atanu Santra</td>
+              <td>joynagarps@gmail.com</td>
+              <td>269</td>
+              <td>160</td>
+            </tr>
+            <tr>
+              <td>SI Debasis Nag</td>
+              <td>psmonteswar@gmail.com</td>
+              <td>162</td>
+              <td>160</td>
+            </tr>
+            <tr>
+              <td>Shri Suraj Thakuri</td>
+              <td>ddjalpaiguri.cidwb@gmail.com</td>
+              <td>120</td>
+              <td>160</td>
+            </tr>
+            <tr>
+              <td>Inspr. MD. FIROJ  ALI</td>
+              <td>rabindranagarthana@gmail.com</td>
+              <td>1726</td>
+              <td>159</td>
+            </tr>
+            <tr>
+              <td>SI. Samir Sarkar II</td>
+              <td>pspolba@policewb.gov.in</td>
+              <td>120</td>
+              <td>158</td>
+            </tr>
+            <tr>
+              <td>SI Tanmoy Bhattacharjee</td>
+              <td>shyampurpshowrah@gmail.com</td>
+              <td>157</td>
+              <td>156</td>
+            </tr>
+            <tr>
+              <td>Shri Raju Sylvester Chettri</td>
+              <td>ddnorthdinajpur.cidwb@gmail.com</td>
+              <td>117</td>
+              <td>156</td>
+            </tr>
+            <tr>
+              <td>Inspr. Manas Chowdhury</td>
+              <td>bongaonps.north24parganas@gmail.com</td>
+              <td>177</td>
+              <td>155</td>
+            </tr>
+            <tr>
+              <td>SI Rasel Parvej Khan</td>
+              <td>psrishra@gmail.com</td>
+              <td>117</td>
+              <td>155</td>
+            </tr>
+            <tr>
+              <td>ASI Susanta Das</td>
+              <td>ocdcrbbirbhum@policewb.gov.in</td>
+              <td>454</td>
+              <td>153</td>
+            </tr>
+            <tr>
+              <td>SI Mithun Kr. Ghosh</td>
+              <td>jamalpurps.bdn@gmail.com</td>
+              <td>605</td>
+              <td>151</td>
+            </tr>
+            <tr>
+              <td>Shri Swarup Kumar Saha</td>
+              <td>cheatingfraud.cidwb@gmail.com</td>
+              <td>264</td>
+              <td>151</td>
+            </tr>
+            <tr>
+              <td>SI Balay Ghosh</td>
+              <td>gaighataps.north24parganas@gmail.com</td>
+              <td>186</td>
+              <td>151</td>
+            </tr>
+            <tr>
+              <td>SI Suman Das</td>
+              <td>pssundarban@gmail.com</td>
+              <td>3019</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>SI Purnendu Bikash Das</td>
+              <td>ocpanruips@policewb.gov.in</td>
+              <td>249</td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>S.I.Amit Mitra</td>
+              <td>pstarakeswar@policewb.gov.in</td>
+              <td>556</td>
+              <td>148</td>
+            </tr>
+            <tr>
+              <td>SI Tamal Taru Sarkar</td>
+              <td>psbhimpurnadia@gmail.com</td>
+              <td>656</td>
+              <td>147</td>
+            </tr>
+            <tr>
+              <td>Inspr. Basudeb Mallik</td>
+              <td>icnaihatigrps@gmail.com</td>
+              <td>176</td>
+              <td>143</td>
+            </tr>
+            <tr>
+              <td>SI Samaresh Ghosh</td>
+              <td>jibantalaps@gmail.com</td>
+              <td>1326</td>
+              <td>142</td>
+            </tr>
+            <tr>
+              <td>SI Apurba Chakraborty</td>
+              <td>satyajitbanerjeeocjdvgrps@gmail.com</td>
+              <td>113</td>
+              <td>142</td>
+            </tr>
+            <tr>
+              <td>Shri Goutam Saha</td>
+              <td>ahtu.cidwb@gmail.com</td>
+              <td>314</td>
+              <td>139</td>
+            </tr>
+            <tr>
+              <td>S.I. Sukhamoy Chakraborty</td>
+              <td>pssingur@policewb.gov.in</td>
+              <td>111</td>
+              <td>138</td>
+            </tr>
+            <tr>
+              <td>ASI Bsiwajit Saha</td>
+              <td>ccrbcpc@gmail.com</td>
+              <td>174</td>
+              <td>133</td>
+            </tr>
+            <tr>
+              <td>Shri Saibal Bagchi</td>
+              <td>ddmalda.cidwb@gmail.com</td>
+              <td>206</td>
+              <td>131</td>
+            </tr>
+            <tr>
+              <td>SI Madhusudan Paul</td>
+              <td>ocmaipithcoastalps2014@gmail.com</td>
+              <td>469</td>
+              <td>129</td>
+            </tr>
+            <tr>
+              <td>SI Jyotirmoy Sarkar</td>
+              <td>samirkrghoshwbp@gmail.com</td>
+              <td>176</td>
+              <td>127</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Kaushik Kundu</td>
+              <td>uluberiaps@gmail.com</td>
+              <td>164</td>
+              <td>124</td>
+            </tr>
+            <tr>
+              <td>SI Kinkar Mondal</td>
+              <td>amtapshwh@gmail.com</td>
+              <td>269</td>
+              <td>123</td>
+            </tr>
+            <tr>
+              <td>S.I. Arnab Gunguly</td>
+              <td>pspursurah@policewb.gov.in</td>
+              <td>106</td>
+              <td>122</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Pradip Kr. Dan</td>
+              <td>pschinsurah@policewb.gov.in</td>
+              <td>168</td>
+              <td>116</td>
+            </tr>
+            <tr>
+              <td>SI Sudipta Sadhukhan</td>
+              <td>psdhaniakhali@policewb.gov.in</td>
+              <td>368</td>
+              <td>110</td>
+            </tr>
+            <tr>
+              <td>Inspr. Shri Bidit Kumar Mondal</td>
+              <td>ccell.bdn@policewb.gov.in</td>
+              <td>103</td>
+              <td>110</td>
+            </tr>
+            <tr>
+              <td>SI Tapash Ghosh</td>
+              <td>psdhubulianadia@gmail.com</td>
+              <td>1079</td>
+              <td>108</td>
+            </tr>
+            <tr>
+              <td>Shri Pintu Sarkar</td>
+              <td>pskarimpurnadia@gmail.com</td>
+              <td>469</td>
+              <td>108</td>
+            </tr>
+            <tr>
+              <td>SI Sunil Kr. Roy</td>
+              <td>mdtps2014@gmail.com</td>
+              <td>105</td>
+              <td>108</td>
+            </tr>
+            <tr>
+              <td>SI Soumya De</td>
+              <td>lalgolaps48@gmail.com</td>
+              <td>3346</td>
+              <td>106</td>
+            </tr>
+            <tr>
+              <td>SI Madhusudan Ghosh</td>
+              <td>psdadpur@policewb.gov.in</td>
+              <td>250</td>
+              <td>106</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </aside>
+{% endblock content %}
+{% endcache %}

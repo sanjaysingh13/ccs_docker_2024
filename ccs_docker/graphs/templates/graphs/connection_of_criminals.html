@@ -1,0 +1,10 @@
+{% extends "base_graphs.html" %}
+
+{% block title %}
+  Criminals Connection
+{% endblock title %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  {% crispy form form.helper %}
+{% endblock content %}

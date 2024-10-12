@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=ccs_docker
+POSTGRES_USER=WShJrybWmhzWgXwEdFFqoWaNsfXcehMS
+POSTGRES_PASSWORD=UJKMvZafVmPQ24f40MtZIa4dKc4HVeE9fEIYg5taWV6RWcWnfbzpFtYfy0TILiFw

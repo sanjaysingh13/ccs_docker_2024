@@ -1,0 +1,98 @@
+@media screen and (min-width: 415px) {
+	#geolocation {
+		width: 90vw;
+		height: 85vh;
+	}
+
+	#geolocation2 {
+		width: 90vw;
+		height: 85vh;
+	}
+
+	#sidebar {
+		height: 30vh;
+		overflow: scroll;
+	}
+}
+
+@media screen and (max-width: 414px) {
+	#geolocation {
+		width: 90vw;
+		height: 85vh;
+	}
+
+	#geolocation2 {
+		width: 90vw;
+		height: 50vh;
+	}
+
+	#sidebar {
+		height: 10vh;
+		overflow: scroll;
+	}
+
+	#mobile_sidebar {
+		position: fixed;
+		top: 70px;
+		left: 120px;
+	}
+
+	#mobile_sidebar2 {
+		position: fixed;
+		bottom: 10px;
+		left: 150px;
+	}
+
+	#mobile_map {
+		position: fixed;
+		bottom: 10px;
+		left: 0;
+	}
+}
+
+a.map_link {
+	color: hotpink;
+	background-color: rgba(0, 0, 0, 0.7);
+	padding: 4px;
+	font-weight: bold;
+}
+
+.marker_container {
+	padding: 5px;
+	color: white;
+	background: -webkit-linear-gradient(to bottom, #00102C 0%, #023362 25%, #7699A8 70%, #E19656 100%);
+	background: -o-linear-gradient(to bottom, #00102C 0%, #023362 25%, #7699A8 70%, #E19656 100%);
+	background: -moz-linear-gradient(to bottom, #00102C 0%, #023362 25%, #7699A8 70%, #E19656 100%);
+	background: linear-gradient(to bottom, #00102C 0%, #023362 25%, #7699A8 70%, #E19656 100%);
+	background: -webkit-linear-gradient(to bottom, #00102C 0%, #023362 25%, #7699A8 70%, #E19656 100%);
+}
+
+.marker_container_2 {
+	padding: 0px;
+	color: white;
+	background: rgba(255, 0, 0, 0.5);
+	font-size: 0.8em;
+}
+
+.wrapper {
+	width: 840px;
+	position: relative;
+	margin: auto;
+	max-width: 90%;
+}
+
+.demo-wrapper {
+	height: 400px;
+	background: rgba(0, 0, 0, 0.03);
+	border: 3px solid black;
+}
+
+h3.heat_map {
+	position: fixed;
+	bottom: 50px;
+	right: 80px;
+	z-index: 1;
+	background: black;
+	color: white;
+	padding: 5px;
+}

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Vehicle Search Results
+{% endblock title %}
+{% block content %}
+  <h1 class="mb-4">Vehicle Search Results</h1>
+  {% if vehicles %}
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Vehicle</th>
+            <th>Crime</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for vehicle in vehicles %}
+            <tr>
+              <td>{{ vehicle.0 }}</td>
+              <td>
+                <a href="{% url 'backend:crime-detail' uuid=vehicle.2 %}"
+                   class="list-group-item">{{ vehicle.1 }}</a>
+              </td>
+              <td>{{ vehicle.3 }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% endif %}
+{% endblock content %}
